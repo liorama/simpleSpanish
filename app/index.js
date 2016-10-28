@@ -10,20 +10,38 @@ import {
 	Text,
 	View,
 	Platform,
+	AsyncStorage,
 	WebView
 	} from 'react-native';
 import Tabs from 'react-native-tabs';
 import ScrollableTabView, { ScrollableTabBar } from 'react-native-scrollable-tab-view';
-//import pages from 'app/content'
+
+
+const initialTab = 5;
+//function setInStorage(key, value) {
+//	try {
+//		AsyncStorage.setItem(key, value);
+//	} catch (error) {
+//		// Error saving data
+//	}
+//}
+//function getFromStorage(key) {
+//	try {
+//		return AsyncStorage.getItem(key);
+//	} catch (error) {
+//		// Error saving data
+//	}
+//}
 
 export default class simpleSpanish extends Component {
 	constructor(props) {
 		super(props);
 		this.pages = {};
-		this.pages.introduction = {title: "הקדמה", file: require('simpleSpanish/app/introduction.html')};
-		this.pages.chapter_1 = {title: "פרק 1", file: require('simpleSpanish/app/chapter-1.html')};
-		this.pages.chapter_2 = {title: "פרק 2", file: require('simpleSpanish/app/chapter-2.html')};
-		this.pages.chapter_3 = {title: "פרק 3", file: require('simpleSpanish/app/chapter-3.html')};
+		this.pages.introduction = {title: "הקדמה", file: require('simpleSpanish/app/content/introduction.html')};
+		this.pages.chapter_1 = {title: "פרק 1", file: require('simpleSpanish/app/content/chapter-1.html')};
+		this.pages.chapter_2 = {title: "פרק 2", file: require('simpleSpanish/app/content/chapter-2.html')};
+		this.pages.chapter_3 = {title: "פרק 3", file: require('simpleSpanish/app/content/chapter-3.html')};
+		this.pages.chapter_3 = {title: "פרק 4", file: require('simpleSpanish/app/content/chapter-4.html')};
 
 		this.state = {
 			page: 'first'
@@ -37,18 +55,10 @@ export default class simpleSpanish extends Component {
 			tabbarStyles.push(styles.androidTabbar);
 		}
 		const tabs = [];
-		//for (tabContent of this.pages) {
-		//		tabs.push(<WebView
-		//			tabLabel="asdf"
-		//			source={this.pages.introduction}
-		//			style={styles.webview}>
-		//		</WebView>)
-		//);
-		//}
 		return (
 			<View style={styles.container}>
 				<ScrollableTabView
-					initialPage={0}
+					initialPage={initialTab}
 					renderTabBar={() => <ScrollableTabBar />}>
 					{
 
@@ -59,7 +69,7 @@ export default class simpleSpanish extends Component {
 								source={data.file}
 								style={styles.webview}>
 							</WebView>
-						}, this)
+						}, this).reverse()
 					}
 				</ScrollableTabView>
 			</View>

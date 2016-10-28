@@ -1,8 +1,4 @@
-{
-	"chapter_files" : [
-		"introduction.html",
-		"chapter.1.html",
-		"chapter-2.html",
-		"chapter-3.html"
-	]
+module.export  = {
+	basePath: "simpleSpanish/app/"
+	contentBasePath: this.basePath + "content"
 }
