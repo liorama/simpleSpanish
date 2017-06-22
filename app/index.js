@@ -49,7 +49,6 @@ export default class simpleSpanish extends Component {
 	}
 
 	render() {
-		//const { page } = this.state;
 		const tabbarStyles = [styles.tabbar];
 		if (Platform.OS === 'android') {
 			tabbarStyles.push(styles.androidTabbar);
@@ -61,10 +60,10 @@ export default class simpleSpanish extends Component {
 					initialPage={initialTab}
 					renderTabBar={() => <ScrollableTabBar />}>
 					{
-
 						Object.keys(this.pages).map(function(key) {
-							var data = this.pages[key];
+							let data = this.pages[key];
 							return <WebView
+								key={key}
 								tabLabel={data.title}
 								source={data.file}
 								style={styles.webview}>
