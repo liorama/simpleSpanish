@@ -1,9 +1,3 @@
-/**
- * Sample React Native App
- * https://github.com/facebook/react-native
- * @flow
- */
-
 import React, { Component } from 'react';
 import {
 	StyleSheet,
@@ -15,9 +9,10 @@ import {
 	} from 'react-native';
 import Tabs from 'react-native-tabs';
 import ScrollableTabView, { ScrollableTabBar } from 'react-native-scrollable-tab-view';
+import Pdf from 'react-native-pdf';
 
 
-const initialTab = 5;
+
 //function setInStorage(key, value) {
 //	try {
 //		AsyncStorage.setItem(key, value);
@@ -53,23 +48,21 @@ export default class simpleSpanish extends Component {
 		if (Platform.OS === 'android') {
 			tabbarStyles.push(styles.androidTabbar);
 		}
-		const tabs = [];
+		const tabs = Object.keys(this.pages).map(function(key) {
+			let data = this.pages[key];
+			return <WebView
+				key={key}
+				tabLabel={data.title}
+				source={data.file}
+				style={styles.webview}>
+			</WebView>
+		}, this).reverse();
 		return (
 			<View style={styles.container}>
 				<ScrollableTabView
-					initialPage={initialTab}
+					initialPage={tabs.length}
 					renderTabBar={() => <ScrollableTabBar />}>
-					{
-						Object.keys(this.pages).map(function(key) {
-							let data = this.pages[key];
-							return <WebView
-								key={key}
-								tabLabel={data.title}
-								source={data.file}
-								style={styles.webview}>
-							</WebView>
-						}, this).reverse()
-					}
+					{tabs}
 				</ScrollableTabView>
 			</View>
 		);
@@ -83,6 +76,7 @@ const styles = StyleSheet.create({
 		justifyContent: 'center',
 		alignItems: 'center'
 	},
+
 	webview: {
 		flex: 1,
 		flexDirection: 'column',
