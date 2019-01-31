@@ -1,0 +1,1 @@
+IDRViewer.config = {"pagecount":1,"title":"","author":"dell","fileName":"alphabet_list.pdf","bounds":[[909,1286]],"bookmarks":[{"title":"רשימת האלף-בית הספרדי והגייתו","page":1,"zoom":"XYZ 771 1157 0"}],"thumbnailType":"jpg","pageType":"html","pageLabels":[]};

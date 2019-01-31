@@ -1,0 +1,1 @@
+IDRViewer.config = {"pagecount":1,"title":"","author":"dell","fileName":"introduction.pdf","bounds":[[909,1286]],"bookmarks":[{"title":"הקדמה","page":1,"zoom":"XYZ 771 1148 0"}],"thumbnailType":"jpg","pageType":"html","pageLabels":[]};
