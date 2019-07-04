@@ -35,27 +35,27 @@ export default class simpleSpanish extends Component {
 	constructor(props) {
 		super(props);
 		const pages = this.pages = [
-			// {title: "אינדקס", file: require("./assets/newhtml/index/index.html")},
-			// {title: "הקדמה", file: require("./assets/newhtml/introduction/index.html")},
-			{title: "פרק 1", file: require("./assets/htmltests/chapter-1/chapter-1.html")},
+			{title: "אינדקס", file: require("./assets/htmltests/index.html")},
+			{title: "הקדמה", file: require("./assets/htmltests/introduction.html")},
+			{title: "פרק 1", file: require("./assets/htmltests/chapter-1.html")},
 			{title: "פרק 2", file: require("./assets/htmltests/chapter-2.html")},
-			{title: "פרק 3", file: require("./assets/htmltests/chapter-5.html")},
-			{title: "פרק 4", file: require("./assets/htmltests/chapter-6.html")},
+			{title: "פרק 3", file: require("./assets/htmltests/chapter-3.html")},
+			{title: "פרק 4", file: require("./assets/htmltests/chapter-4.html")},
 			{title: "פרק 5", file: require("./assets/htmltests/chapter-5.html")},
 			{title: "פרק 6", file: require("./assets/htmltests/chapter-6.html")},
 			{title: "פרק 7", file: require("./assets/htmltests/chapter-7.html")},
 			{title: "פרק 8", file: require("./assets/htmltests/chapter-8.html")},
 			{title: "פרק 9", file: require("./assets/htmltests/chapter-9.html")},
-			{title: "פרק 10", file: require("./assets/newhtml/chapter_10/index.html")},
-			{title: "פרק 11", file: require("./assets/newhtml/chapter_11/index.html")},
-			{title: "פרק 12", file: require("./assets/newhtml/chapter_12/index.html")},
-			{title: "פרק 13", file: require("./assets/newhtml/chapter_13/index.html")},
-			{title: "פרק 14", file: require("./assets/newhtml/chapter_14/index.html")},
-			{title: "פרק 15", file: require("./assets/newhtml/chapter_15/index.html")},
-			{title: "מילון", file: require("./assets/newhtml/dictionary/index.html")},
-			{title: "רשימת אלפבית", file: require("./assets/newhtml/alphabet_list/index.html")},
-			{title: "תוספות", file: require("./assets/newhtml/apendix/index.html")},
-			{title: "עטיפה אחורית", file: require("./assets/newhtml/back_cover/index.html")},
+			{title: "פרק 10", file: require("./assets/htmltests/chapter-10.html")},
+			{title: "פרק 11", file: require("./assets/htmltests/chapter-11.html")},
+			{title: "פרק 12", file: require("./assets/htmltests/chapter-12.html")},
+			{title: "פרק 13", file: require("./assets/htmltests/chapter-13.html")},
+			{title: "פרק 14", file: require("./assets/htmltests/chapter-14.html")},
+			{title: "פרק 15", file: require("./assets/htmltests/chapter-15.html")},
+			{title: "מילון", file: require("./assets/htmltests/dictionary.html")},
+			{title: "רשימת אלפבית", file: require("./assets/htmltests/alphabet-list.html")},
+			{title: "תוספות", file: require("./assets/htmltests/apendix.html")},
+			{title: "עטיפה אחורית", file: require("./assets/htmltests/back-cover.html")},
 		];
 		this.state = {
 			index: 0,
@@ -63,12 +63,13 @@ export default class simpleSpanish extends Component {
 	}
 
 	render() {
+		const currentChapterDisplayIndex = this.state.index + 1;
 		let nextPage = this.state.index + 1; // todo: this seems to work only from chapter 1 to 2.
 		if (nextPage >= this.pages.length) {
 			nextPage = 0;
 		}
 		let previousPage = this.state.index - 1;
-		if (previousPage <= 0) {
+		if (previousPage < 0) {
 			previousPage = this.pages.length - 1;
 		}
 		return (
@@ -81,11 +82,12 @@ export default class simpleSpanish extends Component {
 								}
 							)
 						}}
-						title={"Next chapter (" + nextPage + "/" + this.pages.length + ")"}  // todo: The next page number to display is different then the next page. if nextPage is always one less the display next page
+						title="Next"
 						color="#841584"
 						accessibilityLabel="Next Chapter"
 						style={styles.nav_buttons}
 					/>
+					<Text> Chapter: { currentChapterDisplayIndex } / { this.pages.length } </Text>
 					<Button
 						onPress={() => {
 							this.setState({
@@ -93,14 +95,14 @@ export default class simpleSpanish extends Component {
 								}
 							)
 						}}
-						title={"Previous chapter (" + previousPage + "/" + this.pages.length + ")"}
+						title="Previous"
 						color="#841584"
 						accessibilityLabel="Previous Chapter"
 						style={styles.nav_buttons}
 					/>
 				</View>
 				<View style={styles.content_container}>
-					<Text>{this.state.index}</Text>
+					<Text>Zero index: {this.state.index}</Text>
 					<WebView source={this.pages[this.state.index].file} originWhitelist={['*']} style={styles.webview}   injectedJavaScript={`const meta = document.createElement('meta'); meta.setAttribute('content', 'width=width, initial-scale=0.7, maximum-scale=2, user-scalable=2.0'); meta.setAttribute('name', 'viewport'); document.getElementsByTagName('head')[0].appendChild(meta); `}
   scalesPageToFit={false}> </WebView>
 				</View>
